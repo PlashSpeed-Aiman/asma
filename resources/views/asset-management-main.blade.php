@@ -29,9 +29,9 @@
                 <div class="menu bg-base-200 rounded-box">
                     <ul class="menu-horizontal gap-2 p-2">
                         <li>
-                            <a class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="document.getElementById('create_asset_modal').showModal()">
                                 <i class="fas fa-plus"></i> Add Asset
-                            </a>
+                            </button>
                         </li>
                         <li>
                             <a class="btn btn-info">
@@ -102,6 +102,7 @@
         </div>
     </div>
 
+    @include('modals.asset-create-modal')
     <!-- Import Modal -->
     <dialog id="import_modal" class="modal">
         <div class="modal-box">
@@ -120,4 +121,13 @@
                 </div>
             </form>
         </div>
-    </dialog>@endsection
+    </dialog>
+@endsection
+@push('scripts')
+    <script>
+        // JavaScript to handle modal opening and closing
+        const assetCreateModal = document.getElementById('asset-create-modal');
+
+
+    </script>
+@endpush
