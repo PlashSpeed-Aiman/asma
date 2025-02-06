@@ -25,6 +25,12 @@
             </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
+                    <span class="label-text">Telephone Number</span>
+                </label>
+                <input type="number" name="borrower_name" class="input input-bordered w-full max-w-xs" />
+            </div>
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
                     <span class="label-text">Start Date</span>
                 </label>
                 <input type="date" name="start_date" class="input input-bordered w-full max-w-xs" />
