@@ -1,3 +1,4 @@
+
 @extends('shared._layout')
 @section('content')
 <div class="container mx-auto">
@@ -5,7 +6,7 @@
         Borrow an Asset
     </div>
     <div id="form-borrow">
-        <form  method="POST">
+        <form  method="POST" action="{{ route('loan.create') }}">
             @csrf
             <div class="form-control w-full max-w-xs">
                 <label class="label">
@@ -13,8 +14,9 @@
                 </label>
                 <select name="asset_id" class="select select-bordered">
                     <option disabled selected>Pick an asset</option>
-                    <option value="1">Asset 1</option>
-                    <option value="2">Asset 2</option>
+                    @foreach ($assets as $asset)
+                    <option value="{{ $asset->id }}">{{ $asset->name }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="form-control w-full max-w-xs">
@@ -44,7 +46,8 @@
 
             <div class="form-control w-full max-w-xs mt-4">
                 <button type="submit" class="btn btn-primary">Submit Borrow Request</button>
-            </div>    </div>
+            </div>
+            </form>
 
 </div>
 @endsection

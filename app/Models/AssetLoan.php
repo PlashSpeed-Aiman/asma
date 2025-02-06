@@ -20,4 +20,10 @@ class AssetLoan extends Model
 {
     protected $table = 'asset_loans';
     protected $fillable = ['asset_id', 'name', 'telephone_number', 'start_date','end_date', 'status'];
+
+    public function asset(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+            return $this->belongsTo(Asset::class);
+    }
+
 }
