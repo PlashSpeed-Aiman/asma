@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('asset_loan', function (Blueprint $table) {
             //
             $table->rename('asset_loans');
-
         });
     }
 

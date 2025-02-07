@@ -7,6 +7,6 @@
     <a href="/list" class="btn btn-ghost normal-case text-xl">Asset List</a>
   </div>
   <div class="">
-    <a href="/asset-management" class="btn btn-ghost normal-case text-xl">Asset Management</a>
+    <a href="{{ route('asset-management.index') }}" class="btn btn-ghost normal-case text-xl">Asset Management</a>
   </div>
 </div>

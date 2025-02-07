@@ -14,5 +14,6 @@ class Asset extends Model
         'name',
         'description',
         'details',
+        'status',
     ];
 }

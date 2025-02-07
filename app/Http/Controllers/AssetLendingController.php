@@ -12,7 +12,7 @@ class AssetLendingController extends Controller
 {
     public function index()
     {
-        $assets = Asset::all();
+        $assets = Asset::where('status', 'available')->get();
         return view('greeting',['assets' => $assets]);
     }
 
@@ -24,13 +24,17 @@ class AssetLendingController extends Controller
      */
     public function create(Request $request)
     {
-        $validated = $request->validate([
-            // Add validation rules here
+        $asset = AssetLoan::create([
+            'asset_id' => $request->asset_id,
+            'name' => $request->borrower_name,
+            'telephone_number' => $request->telephone_number,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
         ]);
-
         // Process the form data
-        AssetLoan::create($validated);
+        $asset->save();
 
+        // Redirect to the form page with a success message
         return redirect()->back()->with('success', 'Form submitted successfully');
     }
 
