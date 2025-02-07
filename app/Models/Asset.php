@@ -8,12 +8,15 @@ class Asset extends Model
 {
     //
     protected $table = 'assets';
-    protected $primaryKey = 'asset_id';
-
     protected $fillable = [
         'name',
         'description',
         'details',
         'status',
     ];
+
+    public function loans()
+    {
+        return $this->hasMany(AssetLoan::class, 'asset_id', 'id');
+    }
 }

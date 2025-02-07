@@ -24,15 +24,19 @@ class AssetLendingController extends Controller
      */
     public function create(Request $request)
     {
-        $asset = AssetLoan::create([
+        $assetLoan = AssetLoan::create([
             'asset_id' => $request->asset_id,
             'name' => $request->borrower_name,
             'telephone_number' => $request->telephone_number,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
-        // Process the form data
+
+        $asset = Asset::find($assetLoan->asset_id);
+        $asset->status = 'in_use';
         $asset->save();
+        // Process the form data
+        $assetLoan->save();
 
         // Redirect to the form page with a success message
         return redirect()->back()->with('success', 'Form submitted successfully');
