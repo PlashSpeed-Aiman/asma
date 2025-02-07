@@ -16,7 +16,7 @@
     </div>
     @if(Auth::check())
         <div>
-            <div x-data="toggleUser" class="dropdown dropdown-end">
+            <div  class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost">
                     <div class="font-bold">{{ Auth::user()->name }}</div>
                 </label>
@@ -44,18 +44,6 @@
         </div>
         @push('scripts')
             <script>
-                document.addEventListener('alpine:init', () => {
-                    Alpine.data('toggleUser', () => ({
-                        isActive: false,
-                        toggleActive() {
-                            this.isActive = !this.isActive
-                            if (this.isActive) {
-                                document.getElementById('button-active').classList.add('btn-active')
-                            } else {
-                                document.getElementById('button-active').classList.remove('btn-active')
-                            }
-                        }
-                    }))
-                })
+
             </script>
 @endpush

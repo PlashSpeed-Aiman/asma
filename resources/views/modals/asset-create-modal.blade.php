@@ -3,7 +3,7 @@
     <div class="modal-box">
         <h3 class="font-bold text-lg mb-4">Create New Asset</h3>
 
-        <form method="POST">
+        <form method="POST" action="{{ route('asset.create') }}">
             @csrf
 
             <div class="form-control w-full">
@@ -12,12 +12,18 @@
                 </label>
                 <input type="text" name="name" placeholder="Enter asset name" class="input input-bordered w-full" required />
             </div>
+            <div class="form-control w-full">
+                <label class="label">
+                    <span class="label-text">Asset Number</span>
+                </label>
+                <input type="text" name="asset_number" placeholder="Enter asset number" class="input input-bordered w-full" required />
+            </div>
 
-            <div class="form-control w-full mt-4 flex flex-col">
+            <div class="form-control w-full flex flex-col">
                 <label class="label">
                     <span class="label-text">Description</span>
                 </label>
-                <textarea name="description" class="textarea textarea-bordered h-24" placeholder="Enter asset description"></textarea>
+                <textarea name="description" class="textarea textarea-bordered h-24 w-full" placeholder="Enter asset description"></textarea>
             </div>
 
             <div class="modal-action">

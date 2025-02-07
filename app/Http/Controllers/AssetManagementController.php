@@ -21,5 +21,18 @@ class AssetManagementController extends Controller
 
     public function create(Request $request){
 
+        $asset = Asset::create([
+            'name' => $request->name,
+            'asset_number' => $request->asset_number,
+            'description' => $request->description,
+            ]);
+
+        $asset->save();
+        return redirect()->back()->with('success', 'Form submitted successfully');
+    }
+
+    public function asset_modal(){
+        $assets = Asset::all();
+        return view('modals.asset-list-modal', ['assets' => $assets]);
     }
 }

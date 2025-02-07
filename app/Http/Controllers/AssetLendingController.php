@@ -51,7 +51,7 @@ class AssetLendingController extends Controller
     public function list(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
     {
         $perPage = $request->query('per_page', 10); // Default to 10 items per page
-        $assets = AssetLoan::with('asset')->paginate($perPage);
+        $assets = AssetLoan::with('asset')->latest()->paginate($perPage);
         $totalPage = $assets->lastPage();
         return view('assetlist',['assets' => $assets,'totalPage'=> $totalPage]);
     }

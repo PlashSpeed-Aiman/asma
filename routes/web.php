@@ -10,6 +10,10 @@ Route::get('/list', [App\Http\Controllers\AssetLendingController::class, 'list']
 
 Route::get('/asset-management', [App\Http\Controllers\AssetManagementController::class, 'index'])->name('asset-management.index')->middleware('auth');
 
+Route::post('/asset-management/create', [App\Http\Controllers\AssetManagementController::class, 'create'])->name('asset.create')->middleware('auth');
+
+Route::get('/assets/view/partial', [App\Http\Controllers\AssetManagementController::class, 'asset_modal'])->name('asset.modal')->middleware('auth');
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
