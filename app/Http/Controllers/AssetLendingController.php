@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\AssetLoan;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -40,6 +43,17 @@ class AssetLendingController extends Controller
 
         // Redirect to the form page with a success message
         return redirect()->back()->with('success', 'Form submitted successfully');
+    }
+
+    /**
+     * @return View|Factory|Application
+     */
+    public function list(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
+    {
+        $perPage = $request->query('per_page', 10); // Default to 10 items per page
+        $assets = AssetLoan::with('asset')->paginate($perPage);
+        $totalPage = $assets->lastPage();
+        return view('assetlist',['assets' => $assets,'totalPage'=> $totalPage]);
     }
 
 

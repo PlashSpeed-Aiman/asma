@@ -1,10 +1,21 @@
 
 @extends('shared._layout')
 @section('content')
-<div class="container mx-auto">
+<div class="container  mx-auto">
     <div class="badge badge-outline">
         Borrow an Asset
     </div>
+    @if (session('success'))
+        <div x-data="alerts" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div x-data="alerts" class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <div id="form-borrow">
         <form  method="POST" action="{{ route('loan.create') }}">
             @csrf
@@ -51,3 +62,25 @@
 
 </div>
 @endsection
+@push(
+    'scripts'
+)
+    <script>
+    document.addEventListener('alpine:init', () => {
+                Alpine.data('alerts', () => ({
+                    init() {
+                        if (document.querySelector('.alert')) {
+                            setTimeout(() => {
+                                const alert = document.querySelector('.alert');
+                                alert.style.transition = 'opacity 0.5s ease';
+                                alert.style.opacity = '0';
+                                setTimeout(() => {
+                                    alert.remove();
+                                }, 500);
+                            }, 3000);
+                        }
+                    }
+                }));
+            });
+    </script>
+@endpush

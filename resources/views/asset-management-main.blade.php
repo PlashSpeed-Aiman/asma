@@ -1,7 +1,7 @@
 @extends('shared._layout')
 @section('content')
     <!-- Dashboard Stats -->
-    <div class="container-fluid p-4">
+    <div class="container mx-auto p-4">
         <!-- Stats Cards -->
         <div class="stats shadow stats-vertical lg:stats-horizontal w-full mb-4">
             <div class="stat">
