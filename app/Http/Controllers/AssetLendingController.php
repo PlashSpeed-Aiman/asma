@@ -33,6 +33,7 @@ class AssetLendingController extends Controller
             'telephone_number' => $request->telephone_number,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
+            'description' => $request->description,
         ]);
 
         $asset = Asset::find($assetLoan->asset_id);

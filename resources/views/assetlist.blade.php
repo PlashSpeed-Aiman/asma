@@ -10,7 +10,9 @@
                         <th>ID</th>
                         <th>Asset Name</th>
                         <th>Borrower</th>
+                        <th>Telephone Number</th>
                         <th>Status</th>
+                        <th>Description</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -19,7 +21,9 @@
                             <td>{{ $asset->id }}</td>
                             <td>{{ $asset->asset->name }}</td>
                             <td>{{ $asset->name}}</td>
+                            <td>{{ $asset->telephone_number }}</td>
                             <td>{{ $asset->status }}</td>
+                            <td>{{ $asset->description }}</td>
                         </tr>
                     @endforeach
                     </tbody>

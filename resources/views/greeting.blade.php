@@ -44,6 +44,12 @@
             </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
+                    <span class="label-text">Description</span>
+                </label>
+                <input type="text" name="description" placeholder="Reason for borrowing etc" class="input input-bordered w-full max-w-xs" />
+            </div>
+            <div class="form-control w-full max-w-xs">
+                <label class="label">
                     <span class="label-text">Start Date</span>
                 </label>
                 <input type="date" name="start_date" class="input input-bordered w-full max-w-xs" />

@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 class AssetLoan extends Model
 {
     protected $table = 'asset_loans';
-    protected $fillable = ['asset_id', 'name', 'telephone_number', 'start_date','end_date', 'status'];
+    protected $fillable = ['asset_id', 'name', 'telephone_number', 'start_date','end_date', 'status','description'];
 
     public function asset()
     {
