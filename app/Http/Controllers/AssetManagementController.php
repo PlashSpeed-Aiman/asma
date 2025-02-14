@@ -36,7 +36,10 @@ class AssetManagementController extends Controller
         $asset->name = $request->name;
         $asset->asset_number = $request->asset_number;
         $asset->description = $request->description;
+        $asset->status = $request->status;
         $asset->save();
+
+        return redirect()->back()->with('success', 'Asset submitted successfully');
     }
 
     public function list(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application

@@ -3,34 +3,44 @@
     <div class="container mx-auto p-6">
         <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
-                <h2 class="card-title text-2xl mb-4">Asset Details</h2>
+                @if (session('success'))
+                    <div x-data="alerts" class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-                <form method="POST" action="{{ route('asset-management.update', $asset->id) }}">
+                @if (session('error'))
+                    <div x-data="alerts" class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <h2 class="card-title text-2xl mb-4">Asset Details</h2>
+                <form method="POST"  action="{{ route('asset-management.update', $asset->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="form-control mb-4">
+                        <div class="grid grid-cols-2 form-control mb-4">
                             <label class="label mb-2">
                                 <span class="label-text">Asset Name</span>
                             </label>
                             <input type="text" name="name" class="input input-bordered" value="{{ $asset->name }}" />
                         </div>
 
-                        <div class="form-control mb-4">
+                        <div class="grid grid-cols-2 form-control mb-4">
                             <label class="label mb-2">
                                 <span class="label-text">Asset Number</span>
                             </label>
                             <input type="text" name="asset_number" class="input input-bordered" value="{{ $asset->asset_number ?? '' }}" />
                         </div>
 
-                        <div class="form-control mb-4">
+                        <div class=" grid grid-cols-2 form-control mb-4">
                             <label class="label mb-2">
                                 <span class="label-text">Purchase Date</span>
                             </label>
                             <input type="date" name="purchase_date" class="input input-bordered" value="{{ $asset->purchase_date ?? '' }}" />
                         </div>
 
-                        <div class="form-control mb-4">
+                        <div class="grid grid-cols-2 form-control mb-4">
                             <label class="label mb-2">
                                 <span class="label-text">Status</span>
                             </label>
@@ -41,7 +51,7 @@
                             </select>
                         </div>
 
-                        <div class="form-control mb-4">
+                        <div class="grid grid-cols-2 form-control mb-4">
                             <label class="label mb-2">
                                 <span class="label-text">Notes</span>
                             </label>
@@ -56,4 +66,25 @@
                 </form>
             </div>
         </div>
-    </div>@endsection
+    </div>
+@endsection
+@push('scripts')
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('alerts', () => ({
+                init() {
+                    if (document.querySelector('.alert')) {
+                        setTimeout(() => {
+                            const alert = document.querySelector('.alert');
+                            alert.style.transition = 'opacity 0.5s ease';
+                            alert.style.opacity = '0';
+                            setTimeout(() => {
+                                alert.remove();
+                            }, 500);
+                        }, 3000);
+                    }
+                }
+            }));
+        });
+    </script>
+@endpush

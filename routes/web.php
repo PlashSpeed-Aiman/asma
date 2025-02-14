@@ -8,13 +8,17 @@ Route::post('/loan/create', [App\Http\Controllers\AssetLendingController::class,
 
 Route::get('/list', [App\Http\Controllers\AssetLendingController::class, 'list'])->name('loan.list');
 
-Route::get('/asset-management', [App\Http\Controllers\AssetManagementController::class, 'index'])->name('asset-management.index')->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/asset-management', [App\Http\Controllers\AssetManagementController::class, 'index'])->name('asset-management.index');
 
-Route::get('/asset-management/list', [App\Http\Controllers\AssetManagementController::class, 'list'])->name('asset-management.list')->middleware('auth');
+    Route::get('/asset-management/list', [App\Http\Controllers\AssetManagementController::class, 'list'])->name('asset-management.list');
 
-Route::get('/asset-management/show/{id}', [App\Http\Controllers\AssetManagementController::class, 'show'])->name('asset-management.show')->middleware('auth');
+    Route::get('/asset-management/show/{id}', [App\Http\Controllers\AssetManagementController::class, 'show'])->name('asset-management.show');
 
-Route::post('/asset-management/create', [App\Http\Controllers\AssetManagementController::class, 'create'])->name('asset.create')->middleware('auth');
+    Route::put('/asset-management/update/{id}', [App\Http\Controllers\AssetManagementController::class, 'update'])->name('asset-management.update');
+
+    Route::post('/asset-management/create', [App\Http\Controllers\AssetManagementController::class, 'create'])->name('asset.create');
+});
 
 Route::get('/assets/view/partial', [App\Http\Controllers\AssetManagementController::class, 'asset_modal'])->name('asset.modal')->middleware('auth');
 
