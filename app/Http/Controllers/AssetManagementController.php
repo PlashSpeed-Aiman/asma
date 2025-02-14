@@ -31,6 +31,32 @@ class AssetManagementController extends Controller
         return redirect()->back()->with('success', 'Form submitted successfully');
     }
 
+    public function update(Request $request, $id){
+        $asset = Asset::find($id);
+        $asset->name = $request->name;
+        $asset->asset_number = $request->asset_number;
+        $asset->description = $request->description;
+        $asset->save();
+    }
+
+    public function list(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
+    {
+        $assets = Asset::all();
+        return view('asset-management-list', ['assets' => $assets]);
+    }
+
+    public function show($id)
+    {
+        $asset = Asset::findOrFail($id);
+        $loanHistory = AssetLoan::where('asset_id', $id)->get();
+
+        return view('asset-management-show', [
+            'asset' => $asset,
+            'loanHistory' => $loanHistory
+        ]);
+    }
+
+
     public function asset_modal(){
         $assets = Asset::all();
         return view('modals.asset-list-modal', ['assets' => $assets]);

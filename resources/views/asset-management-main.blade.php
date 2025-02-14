@@ -35,7 +35,7 @@
                             </button>
                         </li>
                         <li>
-                            <a id="asset-view-button" @click="openModal" class="btn btn-info">
+                            <a id="asset-view-button" href="{{ route('asset-management.list')  }}" class="btn btn-info">
                                 <i class="fas fa-list"></i> View Assets
                             </a>
                         </li>
