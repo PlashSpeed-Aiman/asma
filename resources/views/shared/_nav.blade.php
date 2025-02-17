@@ -1,6 +1,9 @@
 <div class="navbar bg-base-100 justify-between">
 
-    <div class="flex">
+    <div class="flex items-center content-center">
+        <div class="px-2 text-xl font-bold text-center">
+            0.4.0-dev
+        </div>
         <div class="">
             <a href="/" class="btn btn-ghost normal-case text-xl">Home</a>
         </div>
