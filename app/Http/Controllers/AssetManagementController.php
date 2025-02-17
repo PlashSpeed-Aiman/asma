@@ -19,6 +19,12 @@ class AssetManagementController extends Controller
         return view('asset-management-main', ['assets' => $assets, 'totalAssets' => $totalAssets, 'inUseAssets' => $inUseAssets]);
     }
 
+    public function list(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
+    {
+        $assets = Asset::all();
+        return view('asset-management-list', ['assets' => $assets]);
+    }
+
     public function create(Request $request){
 
         $asset = Asset::create([
@@ -42,10 +48,10 @@ class AssetManagementController extends Controller
         return redirect()->back()->with('success', 'Asset submitted successfully');
     }
 
-    public function list(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
-    {
-        $assets = Asset::all();
-        return view('asset-management-list', ['assets' => $assets]);
+    public function delete($id){
+        $asset = Asset::find($id);
+        $asset->delete();
+        return redirect()->back()->with('success', 'Asset submitted successfully');
     }
 
     public function show($id)
@@ -63,5 +69,13 @@ class AssetManagementController extends Controller
     public function asset_modal(){
         $assets = Asset::all();
         return view('modals.asset-list-modal', ['assets' => $assets]);
+    }
+
+    public function import(){
+        str_getcsv();
+    }
+
+    public function export(){
+
     }
 }
