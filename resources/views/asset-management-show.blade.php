@@ -1,4 +1,5 @@
 @extends('shared._layout')
+@section('title', 'Asset Management')
 @section('content')
     <div class="container mx-auto p-6">
         <div class="card bg-base-100 shadow-xl">

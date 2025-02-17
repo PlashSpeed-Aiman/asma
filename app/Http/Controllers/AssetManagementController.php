@@ -5,18 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\AssetLoan;
+use App\Services\ICsvService;
 use Illuminate\Http\Request;
 
 
 class AssetManagementController extends Controller
 {
+    private ICsvService $icsv;
+    public function __construct(ICsvService $icsv){
+        $this->icsv = $icsv;
+    }
+
     public function index(){
 
         $assets = Asset::all();
         $totalAssets = $assets->count();
         $inUseAssets = AssetLoan::where('status', 'approved')->count();
-
-        return view('asset-management-main', ['assets' => $assets, 'totalAssets' => $totalAssets, 'inUseAssets' => $inUseAssets]);
+        $recentAssets = Asset::where('created_at', '>=', now()->subDays(7))->orderBy('created_at', 'desc')->get();
+        return view('asset-management-main', ['assets' => $assets, 'totalAssets' => $totalAssets, 'inUseAssets' => $inUseAssets, 'recentAssets' => $recentAssets]);
     }
 
     public function list(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application
@@ -51,7 +57,7 @@ class AssetManagementController extends Controller
     public function delete($id){
         $asset = Asset::find($id);
         $asset->delete();
-        return redirect()->back()->with('success', 'Asset submitted successfully');
+        return response()->noContent();
     }
 
     public function show($id)
@@ -71,8 +77,17 @@ class AssetManagementController extends Controller
         return view('modals.asset-list-modal', ['assets' => $assets]);
     }
 
-    public function import(){
-        str_getcsv();
+    public function import(Request $request){
+        $file = $request->file('file');
+        $fileContents = file($file->getPathname());
+
+        $result = $this->icsv->parseToArray($fileContents);
+
+        foreach($result as $asset){
+            $asset->save();
+        }
+
+        return redirect()->back()->with('success', 'File uploaded successfully');
     }
 
     public function export(){

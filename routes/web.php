@@ -18,7 +18,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/asset-management/update/{id}', [App\Http\Controllers\AssetManagementController::class, 'update'])->name('asset-management.update');
 
     Route::post('/asset-management/create', [App\Http\Controllers\AssetManagementController::class, 'create'])->name('asset.create');
-
+    Route::post('/asset-management/import', [App\Http\Controllers\AssetManagementController::class, 'import'])->name('asset.import');
     Route::delete('/asset-management/delete/{id}',[App\Http\Controllers\AssetManagementController::class, 'delete'])->name('asset.delete');
 });
 
