@@ -18,7 +18,7 @@
  @if (app()->environment('local'))
      @vite(['resources/js/app.js'])
      @else
-     <script src="{{ mix('js/app.js') }}"></script>
+     <script src="{{ asset() }}"></script>
  @endif
  @stack('scripts')
 </body>
